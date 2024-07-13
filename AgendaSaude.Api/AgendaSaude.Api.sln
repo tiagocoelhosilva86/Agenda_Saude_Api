@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenda_Saude.Api", "Agenda_Saude.Api\Agenda_Saude.Api.csproj", "{7FB80065-6738-4A42-9786-F587099C1606}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agenda_Saude.Api", "Agenda_Saude.Api\Agenda_Saude.Api.csproj", "{7FB80065-6738-4A42-9786-F587099C1606}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendaSaude.Api.Domain", "AgendaSaude.Api.Domain\AgendaSaude.Api.Domain.csproj", "{400A8CB8-9604-4152-89FD-1CF651FC6419}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendaSaude.Api.Infra.Data", "AgendaSaude.Api.Infra.Data\AgendaSaude.Api.Infra.Data.csproj", "{2D326BDD-0F20-400C-82F6-E9ABD3DF6E96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendaSaude.Api.Infra.Ioc", "AgendaSaude.Api.Infra.Ioc\AgendaSaude.Api.Infra.Ioc.csproj", "{AB4B2294-6A88-478B-A7A5-1D66B8FBFE0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendaSaude.Api.Application", "AgendaSaude.Api.Application\AgendaSaude.Api.Application.csproj", "{F9175267-D6EA-4DB9-8DA5-D22FE40A42E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{7FB80065-6738-4A42-9786-F587099C1606}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FB80065-6738-4A42-9786-F587099C1606}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FB80065-6738-4A42-9786-F587099C1606}.Release|Any CPU.Build.0 = Release|Any CPU
+		{400A8CB8-9604-4152-89FD-1CF651FC6419}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{400A8CB8-9604-4152-89FD-1CF651FC6419}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{400A8CB8-9604-4152-89FD-1CF651FC6419}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{400A8CB8-9604-4152-89FD-1CF651FC6419}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D326BDD-0F20-400C-82F6-E9ABD3DF6E96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D326BDD-0F20-400C-82F6-E9ABD3DF6E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D326BDD-0F20-400C-82F6-E9ABD3DF6E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D326BDD-0F20-400C-82F6-E9ABD3DF6E96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB4B2294-6A88-478B-A7A5-1D66B8FBFE0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB4B2294-6A88-478B-A7A5-1D66B8FBFE0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB4B2294-6A88-478B-A7A5-1D66B8FBFE0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB4B2294-6A88-478B-A7A5-1D66B8FBFE0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9175267-D6EA-4DB9-8DA5-D22FE40A42E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9175267-D6EA-4DB9-8DA5-D22FE40A42E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9175267-D6EA-4DB9-8DA5-D22FE40A42E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9175267-D6EA-4DB9-8DA5-D22FE40A42E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
