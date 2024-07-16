@@ -36,7 +36,7 @@ namespace AgendaSaude.Api.Domain.Entities
 
         [DisplayName("Valor Consulta")]
         [Required(ErrorMessage = "Informe o Valor da Consulta")]
-        public decimal ValorConsulta { get; set; }
+        public string ValorConsulta { get; set; }
 
         [DisplayName("Id Usuario")]
         [Required(ErrorMessage = "Informe o Id do Usuario")]

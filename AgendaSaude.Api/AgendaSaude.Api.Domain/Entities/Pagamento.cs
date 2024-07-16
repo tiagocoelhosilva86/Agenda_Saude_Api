@@ -22,11 +22,5 @@ namespace AgendaSaude.Api.Domain.Entities
 
         public ICollection<Agendamento> Agendamento { get; set; }
 
-        public Pagamento(TipoPagamento tipopagamento, ICollection<Usuario> usuario, ICollection<Agendamento> agendamento)
-        {
-            IdPagamento = IdPagamento;
-            this.Tipopagamento = tipopagamento;
-            Agendamento = agendamento;
-        }
     }
 }

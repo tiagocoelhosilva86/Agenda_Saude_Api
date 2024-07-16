@@ -42,12 +42,11 @@ namespace AgendaSaude.Api.Domain.Entities
         [DisplayName("Admin")]
         public Boolean Admin { get;  set; } = false;
 
-        public ICollection<Agendamento> Agendamento { get; set; }
+        public ICollection<Agendamento>? Agendamento { get; set; }
 
-
-        public Usuario(string name, string email, string senha, DateTime dateRegistro, bool admin, ICollection<Agendamento> agendamento)
+        public Usuario(Guid idUsuario, string name, string email, string senha, DateTime dateRegistro, bool admin)
         {
-            IdUsuario = IdUsuario;
+            IdUsuario = idUsuario;
             Name = name;
             Email = email;
             Senha = senha;
@@ -55,12 +54,6 @@ namespace AgendaSaude.Api.Domain.Entities
             Admin = admin;
         }
 
-        public Usuario(Guid idUsuario, string name, DateTime dateRegistro, ICollection<Agendamento> agendamento)
-        {
-            IdUsuario = idUsuario;
-            Name = name;
-            DateRegistro = dateRegistro;
-            Agendamento = agendamento;
-        }
+        
     }
 }

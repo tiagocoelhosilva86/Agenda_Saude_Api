@@ -1,0 +1,52 @@
+﻿using AgendaSaude.Api.Application.Interfaces;
+using AgendaSaude.Api.Application.ViewModel;
+using AgendaSaude.Api.Domain.Entities;
+using AgendaSaude.Api.Domain.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AgendaSaude.Api.Application.Services
+{
+    public class UsuarioServices : IUsuarioServices
+    {
+        public readonly IUsuarioRepository _usuarioRepository;
+
+
+        public UsuarioServices(IUsuarioRepository usuarioRepository)
+        {
+            _usuarioRepository = usuarioRepository;
+        }
+
+        public async Task<UsuarioViewModel> AdicionarUsuario(UsuarioViewModel usuarioViewModel)
+        {
+
+            var usuario = new Usuario(usuarioViewModel.IdUsuario, usuarioViewModel.Name, usuarioViewModel.Email, usuarioViewModel.Senha, usuarioViewModel.DateRegistro, usuarioViewModel.Admin);
+            usuario.IdUsuario = usuarioViewModel.IdUsuario;
+            usuario.Name = usuarioViewModel.Name;
+            usuario.Email = usuarioViewModel.Email;
+            usuario.Senha = usuarioViewModel.Senha;
+            usuario.DateRegistro = usuarioViewModel.DateRegistro;
+            usuario.Admin = usuarioViewModel.Admin;
+
+            var usuarioCriado = await _usuarioRepository.AdicionarUsuario(usuario);
+
+            if(usuarioCriado == null)
+            {
+                throw new Exception("Error ao criar Usuario");
+            }
+
+            usuarioViewModel.IdUsuario = usuarioCriado.IdUsuario;
+
+            usuarioViewModel.Name = usuarioCriado.Name;
+            usuarioViewModel.Email = usuarioCriado.Email;
+            usuarioViewModel.Senha = usuarioCriado.Senha.ToString();
+            usuarioViewModel.DateRegistro = usuarioCriado.DateRegistro;
+            usuarioViewModel.Admin = usuarioCriado.Admin;
+
+            return usuarioViewModel;
+        }
+    }
+}
