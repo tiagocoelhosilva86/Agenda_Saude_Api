@@ -32,16 +32,30 @@ namespace AgendaSaude.Api.Application.ViewModel
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateRegistro { get; set; }
 
-        public Boolean Admin { get; set; } = false;
+        public Boolean Admin { get; set; }
 
+        public UsuarioViewModel()
+        {
+        }
 
-        public UsuarioViewModel(string name, string email, string senha)
+        public UsuarioViewModel(string name, string email, string senha,Boolean admin)
         {
             this.IdUsuario = Guid.NewGuid();
             this.DateRegistro = DateTime.Now;
             Name = name;
             Email = email;
             Senha = senha;
+            Admin = admin;
+        }
+
+        public UsuarioViewModel(Guid idUsuario, string name, string email, string senha, DateTime dateRegistro, bool admin)
+        {
+            IdUsuario = idUsuario;
+            Name = name;
+            Email = email;
+            Senha = senha;
+            DateRegistro = dateRegistro;
+            Admin = admin;
         }
     }
 

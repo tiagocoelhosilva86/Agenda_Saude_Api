@@ -1,11 +1,7 @@
 ﻿using AgendaSaude.Api.Domain.Entities;
 using AgendaSaude.Api.Domain.Interfaces;
 using AgendaSaude.Api.Infra.Data.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace AgendaSaude.Api.Infra.Data.Repositories
 {
@@ -25,5 +21,14 @@ namespace AgendaSaude.Api.Infra.Data.Repositories
             return usuario;
         }
 
+        public async Task<Usuario> GetUsuarioPorId(Guid id)
+        {
+            return await _context.Usuario.FirstOrDefaultAsync(x => x.IdUsuario.Equals(id));
+        }
+
+        public async Task<List<Usuario>> ListaTodosUsuariosCadastrados()
+        {
+            return await _context.Usuario.ToListAsync();
+        }
     }
 }

@@ -10,5 +10,7 @@ namespace AgendaSaude.Api.Domain.Interfaces
     public interface IUsuarioRepository
     {
         Task<Usuario> AdicionarUsuario(Usuario usuario);
+        Task<List<Usuario>> ListaTodosUsuariosCadastrados();
+        Task<Usuario> GetUsuarioPorId(Guid id);
     }
 }

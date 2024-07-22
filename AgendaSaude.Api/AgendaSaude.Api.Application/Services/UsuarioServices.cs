@@ -7,13 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace AgendaSaude.Api.Application.Services
 {
     public class UsuarioServices : IUsuarioServices
     {
         public readonly IUsuarioRepository _usuarioRepository;
-
 
         public UsuarioServices(IUsuarioRepository usuarioRepository)
         {
@@ -22,7 +22,6 @@ namespace AgendaSaude.Api.Application.Services
 
         public async Task<UsuarioViewModel> AdicionarUsuario(UsuarioViewModel usuarioViewModel)
         {
-
             var usuario = new Usuario(usuarioViewModel.IdUsuario, usuarioViewModel.Name, usuarioViewModel.Email, usuarioViewModel.Senha, usuarioViewModel.DateRegistro, usuarioViewModel.Admin);
             usuario.IdUsuario = usuarioViewModel.IdUsuario;
             usuario.Name = usuarioViewModel.Name;
@@ -33,7 +32,7 @@ namespace AgendaSaude.Api.Application.Services
 
             var usuarioCriado = await _usuarioRepository.AdicionarUsuario(usuario);
 
-            if(usuarioCriado == null)
+            if (usuarioCriado == null)
             {
                 throw new Exception("Error ao criar Usuario");
             }
@@ -47,6 +46,34 @@ namespace AgendaSaude.Api.Application.Services
             usuarioViewModel.Admin = usuarioCriado.Admin;
 
             return usuarioViewModel;
+        }
+
+        public async Task<List<UsuarioViewModel>> listarTodosUsuariosCadastrados()
+        {
+            var usuarios = await _usuarioRepository.ListaTodosUsuariosCadastrados();
+
+            return usuarios.Select(item => new UsuarioViewModel(item.IdUsuario, item.Name, item.Email, item.Senha, item.DateRegistro, item.Admin)).ToList();
+        }
+
+        public async Task<UsuarioViewModel> AtualizarUsuarioCadastradoPorId(string IdUsuario)
+        {
+            //var usuarioatualizar = new
+            throw new NotImplementedException();
+        }
+
+        public async Task<UsuarioViewModel> GetUsuarioPorId(Guid idUsuario)
+        {
+            var usuario = await _usuarioRepository.GetUsuarioPorId(idUsuario);
+
+            if (usuario == null)
+            {
+                throw new KeyNotFoundException("Usuário não encontrado.");
+            }
+
+            var usuarioConvertido = new UsuarioViewModel(usuario.IdUsuario,usuario.Name,usuario.Email,usuario.Senha, usuario.DateRegistro,usuario.Admin);
+
+
+            return usuarioConvertido;
         }
     }
 }
