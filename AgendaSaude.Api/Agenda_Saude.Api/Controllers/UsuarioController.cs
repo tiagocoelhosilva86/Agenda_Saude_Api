@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Agenda_Saude.Api.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController]   
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioServices _usuarioservices;

@@ -17,6 +17,10 @@ namespace AgendaSaude.Api.Infra.Data.EntitiesConfiguration
             builder.Property(x => x.IdUsuario).IsRequired();
             builder.Property(x => x.IdPagamento);
             builder.Property(x => x.Descricao).HasMaxLength(250);
+            builder.Property(x => x.Paciente).HasMaxLength(150);
+            builder.Property(x => x.Telefone);
+            builder.Property(x => x.Endereco).HasMaxLength(250);
+            builder.Property(x => x.Email);
             builder.Property(x => x.DataAgendamendo).IsRequired();
             builder.Property(x => x.ConfirmacaoAgendamento);
             builder.Property(x => x.TipoPagamento);

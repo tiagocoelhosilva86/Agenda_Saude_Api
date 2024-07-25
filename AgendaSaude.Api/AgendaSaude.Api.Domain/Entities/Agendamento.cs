@@ -19,7 +19,25 @@ namespace AgendaSaude.Api.Domain.Entities
 
         [DisplayName("Descrição")]
         [MaxLength(250)]
+        [Required(ErrorMessage = "Informe a Forma de Pagamento")]
         public string Descricao { get; set; }
+
+        [DisplayName("Paciente")]
+        [MaxLength(150)]
+        [Required(ErrorMessage = "Informe o nome do paciente")]
+        public string Paciente { get; set; }
+
+        [DisplayName("Telefone")]
+        public string Telefone { get; set; }
+
+        [DisplayName("Endereço")]
+        [MaxLength(250)]
+        public string Endereco { get; set; }
+
+        [DisplayName("Email")]
+        [RegularExpression(@"^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6}$")]
+        [EmailAddress(ErrorMessage = "email invalido")]
+        public string Email { get; set; } = string.Empty;
 
         [DisplayName("Data Agendamento")]
         [DataType(DataType.DateTime)]
@@ -31,7 +49,6 @@ namespace AgendaSaude.Api.Domain.Entities
         public Boolean ConfirmacaoAgendamento { get; set; }
 
         [DisplayName("Forma de Pagamento")]
-        [Required(ErrorMessage = "Informe a Forma de Pagamento")]
         public TipoPagamento TipoPagamento { get; set; }
 
         [DisplayName("Valor Consulta")]

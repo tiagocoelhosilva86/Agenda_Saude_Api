@@ -10,7 +10,7 @@ namespace AgendaSaude.Api.Infra.Ioc
 {
     public static class DependencyInjectionSwagger
     {
-        public static IServiceCollection AddInfrastructureSwagger(this IServiceCollection services) 
+        public static IServiceCollection AddInfrastructureSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {
