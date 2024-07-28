@@ -55,10 +55,27 @@ namespace AgendaSaude.Api.Application.Services
             return usuarios.Select(item => new UsuarioViewModel(item.IdUsuario, item.Name, item.Email, item.Senha, item.DateRegistro, item.Admin)).ToList();
         }
 
-        public async Task<UsuarioViewModel> AtualizarUsuarioCadastradoPorId(string IdUsuario)
+        public async Task<UsuarioViewModel> AtualizarUsuarioCadastrado(UsuarioViewModel usuarioViewModel, Guid id)
         {
-            //var usuarioatualizar = new
-            throw new NotImplementedException();
+            Usuario usuarioAtualizar = await _usuarioRepository.GetUsuarioPorId(id);
+
+
+            if (usuarioAtualizar == null)
+            {
+                throw new KeyNotFoundException("Usuário não existe");
+            }
+
+            usuarioAtualizar.Name = usuarioViewModel.Name;
+            usuarioAtualizar.Email = usuarioViewModel.Email;
+            usuarioAtualizar.Senha = usuarioViewModel.Senha;
+            usuarioAtualizar.Admin = usuarioViewModel.Admin;
+
+            await _usuarioRepository.AtualizarUsuario(usuarioAtualizar);
+
+            var usuarioAtualizado = new UsuarioViewModel(usuarioAtualizar.IdUsuario,usuarioAtualizar.Name, usuarioAtualizar.Email, usuarioAtualizar.Senha,usuarioAtualizar.DateRegistro, usuarioAtualizar.Admin);
+
+
+            return usuarioAtualizado;
         }
 
         public async Task<UsuarioViewModel> GetUsuarioPorId(Guid idUsuario)
@@ -74,6 +91,20 @@ namespace AgendaSaude.Api.Application.Services
 
 
             return usuarioConvertido;
+        }
+
+        public async Task<bool> DeletarUsuario(Guid idUsuario)
+        {
+            var usuario = await _usuarioRepository.GetUsuarioPorId(idUsuario);
+
+            if(usuario == null)
+            {
+                throw new KeyNotFoundException("Usuário não encontrado.");
+            }
+
+             await _usuarioRepository.DeletarUsuario(usuario);
+
+            return (true);
         }
     }
 }

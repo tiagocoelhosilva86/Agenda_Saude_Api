@@ -37,7 +37,7 @@ namespace Agenda_Saude.Api.Controllers
             return Ok(usuarios);
         }
 
-        [HttpGet("GetUsuarioPorId")]
+        [HttpGet("GetUsuarioPorId/")]
         public async Task<ActionResult<UsuarioViewModel>> BuscarUsuarioCadastradoPorId(Guid idUsuario)
         {
             UsuarioViewModel usuario = await _usuarioservices.GetUsuarioPorId(idUsuario);
@@ -45,12 +45,21 @@ namespace Agenda_Saude.Api.Controllers
             return Ok(usuario);
         }
 
-        [HttpPut("AtualizarUsuariocadastradoPorId/")]
-        public async Task<ActionResult<UsuarioViewModel>> AtualizarUsuarioCadastradoPorId(string idUsuario)
+        [HttpPut("AtualizarUsuariocadastrado/")]
+        public async Task<ActionResult<UsuarioViewModel>> AtualizarUsuarioCadastrado(UsuarioViewModel usuario, Guid id)
         {
-            UsuarioViewModel usuarioAtualizar = await _usuarioservices.AtualizarUsuarioCadastradoPorId(idUsuario);
+            UsuarioViewModel usuarioAtualizar = await _usuarioservices.AtualizarUsuarioCadastrado(usuario,id);
 
             return Ok(usuarioAtualizar);
+        }
+
+        [HttpDelete("DeletarUsuario/")]
+        public async Task<ActionResult<UsuarioViewModel>> DeletarUsuario(Guid id)
+        {
+            await _usuarioservices.DeletarUsuario(id);
+
+            return Ok(true);
+
         }
 
     }

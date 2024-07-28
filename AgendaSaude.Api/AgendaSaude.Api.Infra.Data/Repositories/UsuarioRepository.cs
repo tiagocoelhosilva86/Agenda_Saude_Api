@@ -30,5 +30,22 @@ namespace AgendaSaude.Api.Infra.Data.Repositories
         {
             return await _context.Usuario.ToListAsync();
         }
+
+        public async Task<Usuario> AtualizarUsuario(Usuario usuario)
+        {
+            _context.Usuario.Update(usuario);
+            await _context.SaveChangesAsync();
+
+            return usuario;
+        }
+
+
+        public async Task<bool> DeletarUsuario(Usuario usuario)
+        {
+           _context.Remove(usuario);
+            await _context.SaveChangesAsync();
+            return true;
+            
+        }
     }
 }

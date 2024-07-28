@@ -12,5 +12,9 @@ namespace AgendaSaude.Api.Domain.Interfaces
         Task<Usuario> AdicionarUsuario(Usuario usuario);
         Task<List<Usuario>> ListaTodosUsuariosCadastrados();
         Task<Usuario> GetUsuarioPorId(Guid id);
+
+        Task<Usuario> AtualizarUsuario(Usuario usuario);
+
+        Task<bool> DeletarUsuario(Usuario usuario);
     }
 }
