@@ -22,13 +22,10 @@ namespace AgendaSaude.Api.Application.Services
 
         public async Task<UsuarioViewModel> AdicionarUsuario(UsuarioViewModel usuarioViewModel)
         {
-            var usuario = new Usuario(usuarioViewModel.IdUsuario, usuarioViewModel.Name, usuarioViewModel.Email, usuarioViewModel.Senha, usuarioViewModel.DateRegistro, usuarioViewModel.Admin);
-            usuario.IdUsuario = usuarioViewModel.IdUsuario;
-            usuario.Name = usuarioViewModel.Name;
+            var usuario = new Usuario();
+            usuario.Nome = usuarioViewModel.Nome;
             usuario.Email = usuarioViewModel.Email;
             usuario.Senha = usuarioViewModel.Senha;
-            usuario.DateRegistro = usuarioViewModel.DateRegistro;
-            usuario.Admin = usuarioViewModel.Admin;
 
             var usuarioCriado = await _usuarioRepository.AdicionarUsuario(usuario);
 
@@ -37,25 +34,28 @@ namespace AgendaSaude.Api.Application.Services
                 throw new Exception("Error ao criar Usuario");
             }
 
-            usuarioViewModel.IdUsuario = usuarioCriado.IdUsuario;
+            var createusuarioViewModel = new UsuarioViewModel();
+            createusuarioViewModel.IdUsuario = usuarioCriado.Id;
+            createusuarioViewModel.Nome = usuarioCriado.Nome;
+            createusuarioViewModel.Email = usuarioCriado.Email;
+            createusuarioViewModel.Senha = usuarioCriado.Senha.ToString();;
 
-            usuarioViewModel.Name = usuarioCriado.Name;
-            usuarioViewModel.Email = usuarioCriado.Email;
-            usuarioViewModel.Senha = usuarioCriado.Senha.ToString();
-            usuarioViewModel.DateRegistro = usuarioCriado.DateRegistro;
-            usuarioViewModel.Admin = usuarioCriado.Admin;
-
-            return usuarioViewModel;
+            return createusuarioViewModel;
         }
 
         public async Task<List<UsuarioViewModel>> listarTodosUsuariosCadastrados()
         {
             var usuarios = await _usuarioRepository.ListaTodosUsuariosCadastrados();
 
-            return usuarios.Select(item => new UsuarioViewModel(item.IdUsuario, item.Name, item.Email, item.Senha, item.DateRegistro, item.Admin)).ToList();
+            return usuarios.Select(item =>  new UsuarioViewModel() 
+            { IdUsuario = item.Id,
+            Nome = item.Nome,
+            Email = item.Email,
+            Senha = item.Senha,
+            }).ToList();
         }
 
-        public async Task<UsuarioViewModel> AtualizarUsuarioCadastrado(UsuarioViewModel usuarioViewModel, Guid id)
+        public async Task<UsuarioViewModel> AtualizarUsuarioCadastrado(CreateUsuarioViewModel createUsuarioViewModel, Guid id)
         {
             Usuario usuarioAtualizar = await _usuarioRepository.GetUsuarioPorId(id);
 
@@ -65,14 +65,18 @@ namespace AgendaSaude.Api.Application.Services
                 throw new KeyNotFoundException("Usuário não existe");
             }
 
-            usuarioAtualizar.Name = usuarioViewModel.Name;
-            usuarioAtualizar.Email = usuarioViewModel.Email;
-            usuarioAtualizar.Senha = usuarioViewModel.Senha;
-            usuarioAtualizar.Admin = usuarioViewModel.Admin;
+            usuarioAtualizar.Nome = createUsuarioViewModel.Nome;
+            usuarioAtualizar.Email = createUsuarioViewModel.Email;
+            usuarioAtualizar.Senha = createUsuarioViewModel.Senha;
 
             await _usuarioRepository.AtualizarUsuario(usuarioAtualizar);
 
-            var usuarioAtualizado = new UsuarioViewModel(usuarioAtualizar.IdUsuario,usuarioAtualizar.Name, usuarioAtualizar.Email, usuarioAtualizar.Senha,usuarioAtualizar.DateRegistro, usuarioAtualizar.Admin);
+            var usuarioAtualizado = new UsuarioViewModel();
+
+            usuarioAtualizado.IdUsuario = usuarioAtualizar.Id;
+            usuarioAtualizado.Nome = createUsuarioViewModel.Nome;
+            usuarioAtualizado.Email = createUsuarioViewModel.Email;
+            usuarioAtualizado.Senha= createUsuarioViewModel.Senha;
 
 
             return usuarioAtualizado;
@@ -87,7 +91,12 @@ namespace AgendaSaude.Api.Application.Services
                 throw new KeyNotFoundException("Usuário não encontrado.");
             }
 
-            var usuarioConvertido = new UsuarioViewModel(usuario.IdUsuario,usuario.Name,usuario.Email,usuario.Senha, usuario.DateRegistro,usuario.Admin);
+            var usuarioConvertido = new UsuarioViewModel();
+
+            usuarioConvertido.IdUsuario = usuario.Id;
+            usuarioConvertido.Nome = usuario.Nome;
+            usuarioConvertido.Email = usuario.Email;
+            usuarioConvertido.Senha = usuario.Senha;
 
 
             return usuarioConvertido;
@@ -106,5 +115,6 @@ namespace AgendaSaude.Api.Application.Services
 
             return (true);
         }
+
     }
 }

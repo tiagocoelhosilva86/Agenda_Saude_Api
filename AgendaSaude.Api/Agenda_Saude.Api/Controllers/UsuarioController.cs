@@ -18,9 +18,13 @@ namespace Agenda_Saude.Api.Controllers
         }
 
         [HttpPost("CadastrarUsuario/")]
-        public async Task<ActionResult<UsuarioViewModel>> CadastrarUsuario(UsuarioViewModel usuarioViewModel)
+        public async Task<ActionResult<UsuarioViewModel>> CadastrarUsuario(CreateUsuarioViewModel createUsuarioViewModel)
         {
-            var usuario = new UsuarioViewModel( usuarioViewModel.Name,usuarioViewModel.Email,usuarioViewModel.Senha,usuarioViewModel.Admin);
+            var usuario = new UsuarioViewModel();
+
+            usuario.Nome = createUsuarioViewModel.Nome;
+            usuario.Email = createUsuarioViewModel.Email;
+            usuario.Senha = createUsuarioViewModel.Senha;
 
             UsuarioViewModel usuariocadastrar = await _usuarioservices.AdicionarUsuario(usuario);
 
@@ -46,9 +50,9 @@ namespace Agenda_Saude.Api.Controllers
         }
 
         [HttpPut("AtualizarUsuariocadastrado/")]
-        public async Task<ActionResult<UsuarioViewModel>> AtualizarUsuarioCadastrado(UsuarioViewModel usuario, Guid id)
+        public async Task<ActionResult<UsuarioViewModel>> AtualizarUsuarioCadastrado(CreateUsuarioViewModel createUsuarioViewModel, Guid id)
         {
-            UsuarioViewModel usuarioAtualizar = await _usuarioservices.AtualizarUsuarioCadastrado(usuario,id);
+            UsuarioViewModel usuarioAtualizar = await _usuarioservices.AtualizarUsuarioCadastrado(createUsuarioViewModel, id);
 
             return Ok(usuarioAtualizar);
         }

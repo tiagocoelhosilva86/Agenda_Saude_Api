@@ -23,7 +23,7 @@ namespace AgendaSaude.Api.Infra.Data.Repositories
 
         public async Task<Usuario> GetUsuarioPorId(Guid id)
         {
-            return await _context.Usuario.FirstOrDefaultAsync(x => x.IdUsuario.Equals(id));
+            return await _context.Usuario.FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
 
         public async Task<List<Usuario>> ListaTodosUsuariosCadastrados()
@@ -39,13 +39,11 @@ namespace AgendaSaude.Api.Infra.Data.Repositories
             return usuario;
         }
 
-
         public async Task<bool> DeletarUsuario(Usuario usuario)
         {
-           _context.Remove(usuario);
+            _context.Remove(usuario);
             await _context.SaveChangesAsync();
             return true;
-            
         }
     }
 }

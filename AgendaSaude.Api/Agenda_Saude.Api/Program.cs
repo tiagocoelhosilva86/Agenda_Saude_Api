@@ -50,9 +50,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 
 //Repository
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
 
 //Services
 builder.Services.AddScoped<IUsuarioServices, UsuarioServices>();
+builder.Services.AddScoped<IPacienteServices, PacienteServeces>();
 
 
 
