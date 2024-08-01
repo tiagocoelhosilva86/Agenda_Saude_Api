@@ -13,9 +13,7 @@ namespace AgendaSaude.Api.Application.Interfaces
         Task<UsuarioViewModel> AdicionarUsuario(UsuarioViewModel usuarioViewModel);
         Task <List<UsuarioViewModel>> listarTodosUsuariosCadastrados();
         Task<UsuarioViewModel> GetUsuarioPorId(Guid idUsuario);
-
         Task<UsuarioViewModel> AtualizarUsuarioCadastrado(CreateUsuarioViewModel createUsuarioViewModel,Guid id);
-
         Task<bool> DeletarUsuario(Guid idUsuario);
     }
 }

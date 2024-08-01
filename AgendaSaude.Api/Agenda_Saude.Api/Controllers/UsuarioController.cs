@@ -41,7 +41,7 @@ namespace Agenda_Saude.Api.Controllers
             return Ok(usuarios);
         }
 
-        [HttpGet("GetUsuarioPorId/")]
+        [HttpGet("BuscarUsuarioPorId/")]
         public async Task<ActionResult<UsuarioViewModel>> BuscarUsuarioCadastradoPorId(Guid idUsuario)
         {
             UsuarioViewModel usuario = await _usuarioservices.GetUsuarioPorId(idUsuario);

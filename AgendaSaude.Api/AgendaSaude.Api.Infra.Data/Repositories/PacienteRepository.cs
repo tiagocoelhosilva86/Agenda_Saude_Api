@@ -1,6 +1,7 @@
 ﻿using AgendaSaude.Api.Domain.Entities;
 using AgendaSaude.Api.Domain.Interfaces;
 using AgendaSaude.Api.Infra.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace AgendaSaude.Api.Infra.Data.Repositories
 {
@@ -19,6 +20,20 @@ namespace AgendaSaude.Api.Infra.Data.Repositories
             await _context.SaveChangesAsync();
 
             return paciente;
+        }
+
+        public async Task<Paciente> BuscarPacientePorId(Guid id)
+        {
+            return await _context.Paciente.FirstOrDefaultAsync(x => x.IdPaciente.Equals(id));
+        }
+        public async Task<List<Paciente>> ListarTodosPacientes()
+        {
+            return await _context.Paciente.ToListAsync();
+        }
+
+        public async Task<List<Paciente>> listarTodosPacientesPorIdProficional(Guid id)
+        {
+            return await _context.Paciente.Where(x => x.IdProficional == id).ToListAsync();
         }
     }
 }

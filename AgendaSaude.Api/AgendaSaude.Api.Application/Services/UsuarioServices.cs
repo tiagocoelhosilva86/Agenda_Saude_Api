@@ -57,7 +57,7 @@ namespace AgendaSaude.Api.Application.Services
 
         public async Task<UsuarioViewModel> AtualizarUsuarioCadastrado(CreateUsuarioViewModel createUsuarioViewModel, Guid id)
         {
-            Usuario usuarioAtualizar = await _usuarioRepository.GetUsuarioPorId(id);
+            Usuario usuarioAtualizar = await _usuarioRepository.BuscarUsuarioPorId(id);
 
 
             if (usuarioAtualizar == null)
@@ -84,7 +84,7 @@ namespace AgendaSaude.Api.Application.Services
 
         public async Task<UsuarioViewModel> GetUsuarioPorId(Guid idUsuario)
         {
-            var usuario = await _usuarioRepository.GetUsuarioPorId(idUsuario);
+            var usuario = await _usuarioRepository.BuscarUsuarioPorId(idUsuario);
 
             if (usuario == null)
             {
@@ -104,7 +104,7 @@ namespace AgendaSaude.Api.Application.Services
 
         public async Task<bool> DeletarUsuario(Guid idUsuario)
         {
-            var usuario = await _usuarioRepository.GetUsuarioPorId(idUsuario);
+            var usuario = await _usuarioRepository.BuscarUsuarioPorId(idUsuario);
 
             if(usuario == null)
             {

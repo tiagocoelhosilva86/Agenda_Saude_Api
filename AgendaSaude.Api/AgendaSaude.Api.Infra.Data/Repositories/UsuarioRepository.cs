@@ -21,7 +21,7 @@ namespace AgendaSaude.Api.Infra.Data.Repositories
             return usuario;
         }
 
-        public async Task<Usuario> GetUsuarioPorId(Guid id)
+        public async Task<Usuario> BuscarUsuarioPorId(Guid id)
         {
             return await _context.Usuario.FirstOrDefaultAsync(x => x.Id.Equals(id));
         }

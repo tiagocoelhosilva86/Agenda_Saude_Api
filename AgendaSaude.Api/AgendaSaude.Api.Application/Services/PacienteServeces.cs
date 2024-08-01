@@ -32,7 +32,7 @@ namespace AgendaSaude.Api.Application.Services
 
             if (pacienteCriado == null)
             {
-                throw new Exception("Erro ao criar Paciente");
+                throw new KeyNotFoundException("Erro ao criar Paciente");
             }
 
             var pacienteViewModel = new PacienteViewModel();
@@ -45,6 +45,53 @@ namespace AgendaSaude.Api.Application.Services
             return pacienteViewModel;
 
 
+        }
+
+        public async Task<PacienteViewModel> BuscarPacientePorId(Guid id)
+        {
+            var paciente = await _pacienteRepository.BuscarPacientePorId(id);
+
+            if (paciente == null) 
+            {
+                throw new KeyNotFoundException("Paciente Não Encontrado");
+            }
+
+            var pacienteConvertido = new PacienteViewModel();
+            pacienteConvertido.IdPaciente = paciente.IdPaciente;
+            pacienteConvertido.IdProficional = paciente.IdProficional;
+            pacienteConvertido.Nome = paciente.Nome;
+            pacienteConvertido.Email = paciente.Email;
+            pacienteConvertido.Telefone = paciente.Telefone;
+
+            return pacienteConvertido;
+        }
+
+        public async Task<List<PacienteViewModel>> ListarTodosPacientes()
+        {
+            var listaPacientes = await _pacienteRepository.ListarTodosPacientes();
+
+            return listaPacientes.Select(item => new PacienteViewModel()
+            {
+                IdPaciente = item.IdPaciente,
+                IdProficional= item.IdProficional,
+                Nome = item.Nome,
+                Email = item.Email,
+                Telefone = item.Telefone
+            }).ToList();
+        }
+
+        public async Task<List<PacienteViewModel>> listarTodosPacientesPorIdProficional(Guid id)
+        {
+            var ListaPacientes = await _pacienteRepository.listarTodosPacientesPorIdProficional(id);
+
+            return ListaPacientes.Select(item => new PacienteViewModel()
+            {
+                IdPaciente = item.IdPaciente,
+                IdProficional = item.IdProficional,
+                Nome = item.Nome,
+                Email = item.Email,
+                Telefone = item.Telefone
+            }).ToList();
         }
     }
 }
