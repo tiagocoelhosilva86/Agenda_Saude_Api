@@ -13,5 +13,7 @@ namespace AgendaSaude.Api.Domain.Interfaces
         Task<Paciente> BuscarPacientePorId(Guid id);
         Task<List<Paciente>> ListarTodosPacientes();
         Task<List<Paciente>> listarTodosPacientesPorIdProficional(Guid id);
+        Task<Paciente> EditarPaciente(Paciente paciente);
+        Task<bool> DeletarPaciente(Paciente paciente);
     }
 }

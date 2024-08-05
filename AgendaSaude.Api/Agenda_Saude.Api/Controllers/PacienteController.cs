@@ -47,5 +47,21 @@ namespace Agenda_Saude.Api.Controllers
 
             return Ok(Pacientes);
         }
+
+        [HttpPost("EditarPaciente/")]
+        public async Task<ActionResult<PacienteViewModel>> EditarPaciente(EditarPacienteViewMode editarPacienteViewMode, Guid id)
+        {
+            PacienteViewModel pacienteEditar = await _pacienteServices.EditarPaciente(editarPacienteViewMode,id);
+
+            return Ok(pacienteEditar);
+        }
+
+        [HttpDelete("DeletarPaciente/")]
+        public async Task<ActionResult<PacienteViewModel>> DeletarPaciente(Guid id)
+        {
+            await _pacienteServices.DeletarPaciente(id);
+
+            return Ok(true);
+        }
     }
 }

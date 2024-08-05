@@ -93,5 +93,47 @@ namespace AgendaSaude.Api.Application.Services
                 Telefone = item.Telefone
             }).ToList();
         }
+
+        public async Task<PacienteViewModel> EditarPaciente(EditarPacienteViewMode editarPacienteViewMode, Guid id)
+        {
+            var pacienteEditar = await _pacienteRepository.BuscarPacientePorId(id);
+
+            if (pacienteEditar == null)
+            {
+                throw new KeyNotFoundException("Paciente Não Encontrado");
+            }
+
+            pacienteEditar.Nome = editarPacienteViewMode.Nome;
+            pacienteEditar.Email = editarPacienteViewMode.Email;
+            pacienteEditar.Telefone = editarPacienteViewMode.Telefone;
+
+            await _pacienteRepository.EditarPaciente(pacienteEditar);
+
+            var pacienteEditado = new PacienteViewModel();
+
+            pacienteEditado.IdPaciente = pacienteEditar.IdPaciente;
+            pacienteEditado.IdProficional = pacienteEditar.IdProficional;
+            pacienteEditado.Nome = pacienteEditar.Nome;
+            pacienteEditado.Email = pacienteEditar.Email;
+            pacienteEditado.Telefone = pacienteEditar.Telefone.ToString();
+
+
+
+            return pacienteEditado;
+        }
+
+        public async Task<bool> DeletarPaciente(Guid id)
+        {
+           var pacienteDeletar = await _pacienteRepository.BuscarPacientePorId(id);
+
+            if(pacienteDeletar == null)
+            {
+                throw new KeyNotFoundException("Paciente Não Encontrado");
+            }
+
+            await _pacienteRepository.DeletarPaciente(pacienteDeletar);
+
+            return (true);
+        }
     }
 }

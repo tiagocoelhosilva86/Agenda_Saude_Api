@@ -35,5 +35,20 @@ namespace AgendaSaude.Api.Infra.Data.Repositories
         {
             return await _context.Paciente.Where(x => x.IdProficional == id).ToListAsync();
         }
+
+        public async Task<Paciente> EditarPaciente(Paciente paciente)
+        {
+            _context.Paciente.Update(paciente);
+            await _context.SaveChangesAsync();
+            return paciente;
+        }
+
+        public async Task<bool> DeletarPaciente(Paciente paciente)
+        {
+           _context.Paciente.Remove(paciente);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }
