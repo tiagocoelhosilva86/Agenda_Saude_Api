@@ -28,5 +28,6 @@ namespace AgendaSaude.Api.Domain.Entities
         public string Senha { get; set; } = string.Empty;
 
         public ICollection<Paciente>? Pacientes { get; set; }
+        public ICollection<Agenda>? Agendas { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-using Microsoft.OpenApi.Models;
-using Microsoft.Extensions.Configuration;
+
 using Microsoft.EntityFrameworkCore;
 using AgendaSaude.Api.Infra.Data.Context;
 using AgendaSaude.Api.Infra.Ioc;
@@ -7,7 +6,6 @@ using AgendaSaude.Api.Domain.Interfaces;
 using AgendaSaude.Api.Infra.Data.Repositories;
 using AgendaSaude.Api.Application.Interfaces;
 using AgendaSaude.Api.Application.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,10 +49,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 //Repository
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
+builder.Services.AddScoped<IAgendaRepository, AgendaRepository>();
 
 //Services
 builder.Services.AddScoped<IUsuarioServices, UsuarioServices>();
 builder.Services.AddScoped<IPacienteServices, PacienteServeces>();
+builder.Services.AddScoped<IAgendaServices, AgendaServices>();
 
 
 

@@ -27,5 +27,6 @@ namespace AgendaSaude.Api.Domain.Entities
         public string Telefone { get; set; }
 
         public Usuario Usuario { get; set; }
+        public ICollection<Agenda>? Agendas { get; set; }
     }
 }

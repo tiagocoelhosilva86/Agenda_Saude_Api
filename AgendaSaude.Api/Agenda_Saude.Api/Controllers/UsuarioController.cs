@@ -1,7 +1,5 @@
 ﻿using AgendaSaude.Api.Application.Interfaces;
 using AgendaSaude.Api.Application.ViewModel;
-using AgendaSaude.Api.Domain.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Agenda_Saude.Api.Controllers

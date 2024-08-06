@@ -12,11 +12,13 @@ namespace AgendaSaude.Api.Infra.Data.Context
 
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Paciente> Paciente { get; set; }
+        public DbSet<Agenda> Agenda { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
             modelBuilder.ApplyConfiguration(new PacienteConfiguration());
+            modelBuilder.ApplyConfiguration(new AgendaConfiguratio());
 
             base.OnModelCreating(modelBuilder);
         }

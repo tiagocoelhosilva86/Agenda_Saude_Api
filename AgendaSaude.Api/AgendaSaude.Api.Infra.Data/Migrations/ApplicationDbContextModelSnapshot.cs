@@ -22,6 +22,33 @@ namespace AgendaSaude.Api.Infra.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("AgendaSaude.Api.Domain.Entities.Agenda", b =>
+                {
+                    b.Property<Guid>("IdAgenda")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DataFim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("IdPaciente")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IdProficional")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("IdAgenda");
+
+                    b.HasIndex("IdPaciente");
+
+                    b.HasIndex("IdProficional");
+
+                    b.ToTable("Agenda");
+                });
+
             modelBuilder.Entity("AgendaSaude.Api.Domain.Entities.Paciente", b =>
                 {
                     b.Property<Guid>("IdPaciente")
@@ -74,6 +101,25 @@ namespace AgendaSaude.Api.Infra.Data.Migrations
                     b.ToTable("Usuario");
                 });
 
+            modelBuilder.Entity("AgendaSaude.Api.Domain.Entities.Agenda", b =>
+                {
+                    b.HasOne("AgendaSaude.Api.Domain.Entities.Paciente", "Paciente")
+                        .WithMany("Agendas")
+                        .HasForeignKey("IdPaciente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AgendaSaude.Api.Domain.Entities.Usuario", "Usuario")
+                        .WithMany("Agendas")
+                        .HasForeignKey("IdProficional")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Paciente");
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("AgendaSaude.Api.Domain.Entities.Paciente", b =>
                 {
                     b.HasOne("AgendaSaude.Api.Domain.Entities.Usuario", "Usuario")
@@ -85,8 +131,15 @@ namespace AgendaSaude.Api.Infra.Data.Migrations
                     b.Navigation("Usuario");
                 });
 
+            modelBuilder.Entity("AgendaSaude.Api.Domain.Entities.Paciente", b =>
+                {
+                    b.Navigation("Agendas");
+                });
+
             modelBuilder.Entity("AgendaSaude.Api.Domain.Entities.Usuario", b =>
                 {
+                    b.Navigation("Agendas");
+
                     b.Navigation("Pacientes");
                 });
 #pragma warning restore 612, 618

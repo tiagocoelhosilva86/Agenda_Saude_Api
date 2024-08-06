@@ -1,5 +1,4 @@
 ﻿using AgendaSaude.Api.Application.Interfaces;
-using AgendaSaude.Api.Application.Services;
 using AgendaSaude.Api.Application.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 
