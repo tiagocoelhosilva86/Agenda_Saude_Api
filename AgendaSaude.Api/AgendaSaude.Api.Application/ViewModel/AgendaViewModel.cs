@@ -24,12 +24,13 @@ namespace AgendaSaude.Api.Application.ViewModel
 
         [Required(ErrorMessage = "Informe a Data Fim do Agendamento")]
         public DateTime DataFim { get; set; }
-        public Usuario Usuario { get; set; }
-        public Paciente Paciente { get; set; }
+        public UsuarioViewModel Usuario { get; set; }
+        public PacienteViewModel Paciente { get; set; }
     }
 
     public class CreateAgendaViewModel
     {
+        public Guid IdAgenda { get; set; }
 
         [Required(ErrorMessage = "Informe o id do Paciente")]
         public Guid IdPaciente { get; set; }

@@ -14,7 +14,7 @@ namespace AgendaSaude.Api.Application.Services
             _agendaRepository = agendaRepository;
         }
 
-        public async Task<AgendaViewModel> AdicionarAgenda(CreateAgendaViewModel creatAgendaViewModel)
+        public async Task<CreateAgendaViewModel> AdicionarAgenda(CreateAgendaViewModel creatAgendaViewModel)
         {
             var agenda = new Agenda();
 
@@ -30,7 +30,7 @@ namespace AgendaSaude.Api.Application.Services
                 throw new KeyNotFoundException("Erro ao criar Agenda");
             }
 
-            var agendaViewModel = new AgendaViewModel();
+            var agendaViewModel = new CreateAgendaViewModel();
 
             agendaViewModel.IdAgenda = agendaCriada.IdAgenda;
             agendaViewModel.IdProficional = agendaCriada.IdProficional;
@@ -41,6 +41,50 @@ namespace AgendaSaude.Api.Application.Services
             return agendaViewModel;
 
            
+        }
+
+        public async Task<List<AgendaViewModel>> ListarAgenda()
+        {
+            var listaAgenda = await _agendaRepository.ListarAgendas();
+
+            return listaAgenda.Select(item => new AgendaViewModel()
+            {
+                IdAgenda = item.IdAgenda,
+                IdPaciente = item.IdPaciente,
+                IdProficional = item.IdProficional,
+                DataInicio = item.DataInicio,
+                DataFim = item.DataFim,
+                Paciente = new PacienteViewModel()
+                {
+                    IdPaciente = item.Paciente.IdPaciente,
+                    IdProficional = item.Paciente.IdProficional,
+                    Nome = item.Paciente.Nome,
+                    Email = item.Paciente.Email,
+                    Telefone = item.Paciente.Telefone,
+                }
+                }).ToList();
+        }
+
+        public async Task<List<AgendaViewModel>> ListarAgendasporIdProficional(Guid id)
+        {
+           var listaagendaproficional = await _agendaRepository.ListarAgendasporIdProficional(id);
+            
+
+            return listaagendaproficional.Select(item => new AgendaViewModel()
+            {
+                IdAgenda = item.IdAgenda,
+                IdPaciente = item.IdPaciente,
+                IdProficional = item.IdProficional,
+                DataInicio = item.DataInicio,
+                DataFim = item.DataFim,
+                Paciente = new PacienteViewModel() { 
+                IdPaciente = item.Paciente.IdPaciente,
+                IdProficional = item.Paciente.IdProficional,
+                Nome = item.Paciente.Nome,
+                Email = item.Paciente.Email,
+                Telefone = item.Paciente.Telefone,
+                }
+            }).ToList();
         }
     }
 }

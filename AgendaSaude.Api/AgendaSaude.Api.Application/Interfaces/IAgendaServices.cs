@@ -4,6 +4,8 @@ namespace AgendaSaude.Api.Application.Interfaces
 {
     public interface IAgendaServices
     {
-        Task<AgendaViewModel> AdicionarAgenda(CreateAgendaViewModel agendaViewModel);
+        Task<CreateAgendaViewModel> AdicionarAgenda(CreateAgendaViewModel agendaViewModel);
+        Task<List<AgendaViewModel>> ListarAgenda();
+        Task <List<AgendaViewModel>> ListarAgendasporIdProficional(Guid id);
     }
 }

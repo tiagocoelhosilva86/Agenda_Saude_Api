@@ -16,11 +16,27 @@ namespace Agenda_Saude.Api.Controllers
         }
 
         [HttpPost("CadastrarAgenda/")]
-        public async Task<ActionResult<AgendaViewModel>> CadastrarAgenda(CreateAgendaViewModel agendaViewModel)
+        public async Task<ActionResult<CreateAgendaViewModel>> CadastrarAgenda(CreateAgendaViewModel agendaViewModel)
         {
-            AgendaViewModel agendaCadastrar = await _agendaServices.AdicionarAgenda(agendaViewModel);
+            CreateAgendaViewModel agendaCadastrar = await _agendaServices.AdicionarAgenda(agendaViewModel);
 
             return Ok(agendaCadastrar);
+        }
+
+        [HttpGet("listarAgendas/")]
+        public async Task<ActionResult<List<AgendaViewModel>>> listarAgendas()
+        {
+            List<AgendaViewModel> listaAgenda = await _agendaServices.ListarAgenda();
+
+            return Ok(listaAgenda);
+        }
+
+        [HttpGet("ListarAgendasPorIdProficional/")]
+        public async Task<ActionResult<List<AgendaViewModel>>> listarAgendasPorIdproficional(Guid id)
+        {
+            List<AgendaViewModel> listaAgendaProficional = await _agendaServices.ListarAgendasporIdProficional(id);
+
+            return Ok(listaAgendaProficional);
         }
             
      }
