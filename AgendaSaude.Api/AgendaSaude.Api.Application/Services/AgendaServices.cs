@@ -32,7 +32,6 @@ namespace AgendaSaude.Api.Application.Services
 
             var agendaViewModel = new CreateAgendaViewModel();
 
-            agendaViewModel.IdAgenda = agendaCriada.IdAgenda;
             agendaViewModel.IdProficional = agendaCriada.IdProficional;
             agendaViewModel.IdPaciente = agendaCriada.IdPaciente;
             agendaCriada.DataInicio = agendaCriada.DataInicio;
@@ -54,10 +53,12 @@ namespace AgendaSaude.Api.Application.Services
                 IdProficional = item.IdProficional,
                 DataInicio = item.DataInicio,
                 DataFim = item.DataFim,
-                Paciente = new PacienteViewModel()
+                Proficional = new AgendaUsuarioViewModel()
                 {
-                    IdPaciente = item.Paciente.IdPaciente,
-                    IdProficional = item.Paciente.IdProficional,
+                    Nome = item.Proficional.Nome,
+                    Email = item.Proficional.Email,
+                },
+                Paciente = new AgendaPacienteViewModel(){
                     Nome = item.Paciente.Nome,
                     Email = item.Paciente.Email,
                     Telefone = item.Paciente.Telefone,
@@ -65,9 +66,9 @@ namespace AgendaSaude.Api.Application.Services
                 }).ToList();
         }
 
-        public async Task<List<AgendaViewModel>> ListarAgendasporIdProficional(Guid id)
+        public async Task<List<AgendaViewModel>> ListarAgendasPorIdProficional(Guid id)
         {
-           var listaagendaproficional = await _agendaRepository.ListarAgendasporIdProficional(id);
+           var listaagendaproficional = await _agendaRepository.ListarAgendasPorIdProficional(id);
             
 
             return listaagendaproficional.Select(item => new AgendaViewModel()
@@ -77,11 +78,38 @@ namespace AgendaSaude.Api.Application.Services
                 IdProficional = item.IdProficional,
                 DataInicio = item.DataInicio,
                 DataFim = item.DataFim,
-                Paciente = new PacienteViewModel() { 
-                IdPaciente = item.Paciente.IdPaciente,
-                IdProficional = item.Paciente.IdProficional,
+                Proficional = new AgendaUsuarioViewModel()
+                {
+                    Nome = item.Proficional.Nome,
+                    Email = item.Proficional.Email,
+                },
+                Paciente = new AgendaPacienteViewModel() { 
                 Nome = item.Paciente.Nome,
                 Email = item.Paciente.Email,
+                Telefone = item.Paciente.Telefone,
+                }
+            }).ToList();
+        }
+
+        public async Task<List<AgendaViewModel>> ListarAgendasPorIdPaciente(Guid id)
+        {
+            var ListarAgendasPorIdPaciente = await _agendaRepository.ListarAgendasPorIdPaciente(id);
+
+            return ListarAgendasPorIdPaciente.Select(item => new AgendaViewModel()
+            {
+                IdAgenda = item.IdAgenda,
+                IdPaciente = item.IdPaciente,
+                IdProficional = item.IdProficional,
+                DataInicio = item.DataInicio,
+                DataFim = item.DataFim,
+                Proficional = new AgendaUsuarioViewModel()
+                {
+                    Nome = item.Proficional.Nome,
+                    Email = item.Proficional.Email,
+                },
+                Paciente = new AgendaPacienteViewModel() {
+                Nome = item.Paciente.Nome,
+                Email= item.Paciente.Email,
                 Telefone = item.Paciente.Telefone,
                 }
             }).ToList();

@@ -18,7 +18,7 @@ namespace AgendaSaude.Api.Infra.Data.EntitiesConfiguration
                 .WithMany(x => x.Agendas)
                 .HasForeignKey(x => x.IdPaciente).OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(x => x.Usuario)
+            builder.HasOne(x => x.Proficional)
                 .WithMany(x => x.Agendas)
                 .HasForeignKey(x => x.IdProficional).OnDelete(DeleteBehavior.Cascade);
         }

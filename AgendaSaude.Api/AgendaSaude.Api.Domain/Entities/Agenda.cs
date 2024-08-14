@@ -23,7 +23,7 @@ namespace AgendaSaude.Api.Domain.Entities
         [DisplayName("DataFim")]
         [Required(ErrorMessage = "Informe a Data Fim do Agendamento")]
         public DateTime DataFim { get; set; }
-        public Usuario Usuario { get; set; }
+        public Usuario Proficional { get; set; }
         public Paciente Paciente { get; set; }
     }
 }

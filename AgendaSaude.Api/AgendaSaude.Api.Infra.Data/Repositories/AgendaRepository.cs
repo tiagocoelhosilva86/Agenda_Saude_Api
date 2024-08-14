@@ -23,12 +23,17 @@ namespace AgendaSaude.Api.Infra.Data.Repositories
 
         public async Task<List<Agenda>> ListarAgendas()
         {
-            return await _context.Agenda.Include(x => x.Paciente).ToListAsync();
+            return await _context.Agenda.Include(x => x.Proficional).Include(x => x.Paciente).OrderBy(x => x.DataInicio).ToListAsync();
         }
 
-        public async Task<List<Agenda>> ListarAgendasporIdProficional(Guid id)
+        public async Task<List<Agenda>> ListarAgendasPorIdProficional(Guid id)
         {
-            return await _context.Agenda.Include(x=> x.Paciente).Where(x => x.IdProficional == id).OrderBy(x => x.DataInicio).ToListAsync();
+            return await _context.Agenda.Include(x => x.Proficional).Include(x=> x.Paciente).Where(x => x.IdProficional == id).OrderBy(x => x.DataInicio).ToListAsync();
+        }
+
+        public async Task<List<Agenda>> ListarAgendasPorIdPaciente(Guid id)
+        {
+            return await _context.Agenda.Include(x => x.Proficional).Include(x => x.Paciente).Where(x => x.IdPaciente == id).OrderBy(x => x.DataInicio).ToListAsync();
         }
     }
 }

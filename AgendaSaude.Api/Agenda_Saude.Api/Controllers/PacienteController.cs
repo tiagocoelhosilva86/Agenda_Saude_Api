@@ -31,7 +31,7 @@ namespace Agenda_Saude.Api.Controllers
             return Ok(paciente);
         }
 
-        [HttpGet("ListarTodosPcientes/")]
+        [HttpGet("ListarTodosPacientes/")]
         public async Task<ActionResult<List<PacienteViewModel>>> ListarPacientes()
         {
             List<PacienteViewModel> pacientes = await _pacienteServices.ListarTodosPacientes();

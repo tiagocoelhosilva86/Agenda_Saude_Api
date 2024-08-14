@@ -6,6 +6,7 @@ namespace AgendaSaude.Api.Application.Interfaces
     {
         Task<CreateAgendaViewModel> AdicionarAgenda(CreateAgendaViewModel agendaViewModel);
         Task<List<AgendaViewModel>> ListarAgenda();
-        Task <List<AgendaViewModel>> ListarAgendasporIdProficional(Guid id);
+        Task <List<AgendaViewModel>> ListarAgendasPorIdProficional(Guid id);
+        Task<List<AgendaViewModel>> ListarAgendasPorIdPaciente(Guid id);
     }
 }
